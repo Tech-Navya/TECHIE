@@ -2,106 +2,173 @@ import { Link } from "react-router-dom";
 
 function Patient() {
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen flex flex-col bg-black">
+
       {/* ================= HEADER ================= */}
-      <header className="bg-white shadow-sm">
+      <header className="relative w-full bg-gradient-to-r from-cyan-500 via-blue-600 to-emerald-500 shadow-2xl">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-semibold text-primaryBlue">
+          <h1 className="text-2xl font-extrabold text-white tracking-wide drop-shadow-lg">
             Patient Dashboard
           </h1>
 
           <Link
             to="/"
-            className="text-sm text-gray-600 hover:text-primaryBlue"
+            className="px-4 py-2 rounded-lg bg-white/20 backdrop-blur-md
+                       text-white text-sm font-medium
+                       hover:bg-white/30 hover:scale-105
+                       transition-all duration-300"
           >
             Logout
           </Link>
         </div>
       </header>
 
-      {/* ================= MAIN CONTENT ================= */}
-      <main className="max-w-7xl mx-auto px-6 py-12">
-        {/* Welcome */}
-        <div className="mb-10">
-          <h2 className="text-3xl font-bold text-gray-800">
-            Welcome, Patient 👋
-          </h2>
-          <p className="text-gray-600 mt-2">
-            Book an appointment with available doctors easily.
-          </p>
-        </div>
+      {/* ================= PAGE ================= */}
+      <main
+        className="flex-1 bg-cover bg-center relative"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)), url('/assets/patient.jpeg')",
+        }}
+      >
+        {/* Glow overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-emerald-500/10" />
 
-        {/* ================= BOOK APPOINTMENT CARD ================= */}
-        <div className="max-w-xl bg-white rounded-2xl shadow-md p-8">
-          <h3 className="text-2xl font-semibold text-primaryBlue mb-6">
-            Book Appointment
-          </h3>
+        <div className="relative max-w-7xl mx-auto px-6 py-14">
 
-          <form className="space-y-5">
-            {/* Department */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Department
-              </label>
-              <select className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primaryBlue">
-                <option>Select Department</option>
-                <option>Cardiology</option>
-                <option>Neurology</option>
-                <option>Orthopedics</option>
-                <option>General Medicine</option>
-              </select>
-            </div>
+          {/* Welcome */}
+          <div className="mb-12 text-white">
+            <h2 className="text-4xl font-extrabold tracking-tight animate-[fadeUp_0.8s_ease-out]">
+              Welcome, Patient 👋
+            </h2>
+            <p className="mt-3 text-lg text-white/80 animate-[fadeUp_1s_ease-out]">
+              Book appointments with doctors in seconds.
+            </p>
+          </div>
 
-            {/* Doctor */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Doctor
-              </label>
-              <select className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primaryBlue">
-                <option>Select Doctor</option>
-                <option>Dr. Alex</option>
-                <option>Dr. Sarah</option>
-                <option>Dr. John</option>
-              </select>
-            </div>
-
-            {/* Date */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Appointment Date
-              </label>
-              <input
-                type="date"
-                className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primaryBlue"
-              />
-            </div>
-
-            {/* Time */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Time Slot
-              </label>
-              <select className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primaryBlue">
-                <option>Select Time</option>
-                <option>09:00 AM</option>
-                <option>10:30 AM</option>
-                <option>01:00 PM</option>
-                <option>03:00 PM</option>
-              </select>
-            </div>
-
-            {/* Button */}
-            <button
-              type="submit"
-              className="w-full bg-primaryGreen text-white py-3 rounded-lg font-medium hover:opacity-90 transition"
+          {/* ================= 3D CARD ================= */}
+          <div className="perspective-[1200px]">
+            <div
+              className="
+                max-w-xl
+                bg-white/10 backdrop-blur-2xl
+                border border-white/20
+                rounded-3xl p-8
+                shadow-[0_40px_100px_rgba(0,0,0,0.6)]
+                transform transition-all duration-500
+                hover:-translate-y-3 hover:rotateX-2 hover:rotateY-1
+              "
             >
-              Confirm Appointment
-            </button>
-          </form>
+              <h3 className="text-2xl font-bold text-white mb-6 drop-shadow">
+                Book Appointment
+              </h3>
+
+              <form className="space-y-5">
+
+                {/* Select Fields */}
+                {[
+                  { label: "Department", options: ["Cardiology", "Neurology", "Orthopedics", "General Medicine"] },
+                  { label: "Doctor", options: ["Dr. Alex", "Dr. Sarah", "Dr. John"] },
+                ].map((field, i) => (
+                  <div key={i}>
+                    <label className="block text-sm font-medium text-white/80 mb-1">
+                      {field.label}
+                    </label>
+                    <select
+                      className="
+                        w-full rounded-xl px-4 py-3
+                        bg-white/20 text-white
+                        border border-white/30
+                        focus:ring-2 focus:ring-cyan-400
+                        outline-none transition
+                      "
+                    >
+                      <option className="text-black">Select {field.label}</option>
+                      {field.options.map((opt) => (
+                        <option key={opt} className="text-black">{opt}</option>
+                      ))}
+                    </select>
+                  </div>
+                ))}
+
+                {/* Date */}
+                <div>
+                  <label className="block text-sm font-medium text-white/80 mb-1">
+                    Appointment Date
+                  </label>
+                  <input
+                    type="date"
+                    className="
+                      w-full rounded-xl px-4 py-3
+                      bg-white/20 text-white
+                      border border-white/30
+                      focus:ring-2 focus:ring-emerald-400
+                      outline-none transition
+                    "
+                  />
+                </div>
+
+                {/* Time */}
+                <div>
+                  <label className="block text-sm font-medium text-white/80 mb-1">
+                    Time Slot
+                  </label>
+                  <select
+                    className="
+                      w-full rounded-xl px-4 py-3
+                      bg-white/20 text-white
+                      border border-white/30
+                      focus:ring-2 focus:ring-emerald-400
+                      outline-none transition
+                    "
+                  >
+                    <option className="text-black">Select Time</option>
+                    <option className="text-black">09:00 AM</option>
+                    <option className="text-black">10:30 AM</option>
+                    <option className="text-black">01:00 PM</option>
+                    <option className="text-black">03:00 PM</option>
+                  </select>
+                </div>
+
+                {/* Button */}
+                <button
+                  type="submit"
+                  className="
+                    w-full py-4 rounded-xl font-bold text-white tracking-wide
+                    bg-gradient-to-r from-emerald-400 via-cyan-500 to-blue-600
+                    shadow-[0_15px_40px_rgba(16,185,129,0.6)]
+                    transition-all duration-300
+                    hover:scale-105 hover:shadow-[0_20px_60px_rgba(59,130,246,0.8)]
+                    active:scale-95
+                  "
+                >
+                  Confirm Appointment 🚀
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </main>
+
+      {/* ================= CUSTOM ANIMATION ================= */}
+      <style>
+        {`
+          @keyframes fadeUp {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }
 
 export default Patient;
+
+
